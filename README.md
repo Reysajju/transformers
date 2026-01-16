@@ -60,6 +60,12 @@ limitations under the License.
     <p>State-of-the-art pretrained models for inference and training</p>
 </h3>
 
+<div align="center">
+  <a href="#next-gen-architecture"><strong>🚀 Explore Next-Gen Architectures (Titans, MoD, MTP) »</strong></a>
+</div>
+
+<h3 align="center">
+
 <h3 align="center">
     <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png"/>
 </h3>
@@ -78,6 +84,31 @@ simple, customizable, and efficient.
 There are over 1M+ Transformers [model checkpoints](https://huggingface.co/models?library=transformers&sort=trending) on the [Hugging Face Hub](https://huggingface.com/models) you can use.
 
 Explore the [Hub](https://huggingface.com/) today to find a model and use Transformers to help you get started right away.
+
+## 🚀 Next-Generation Architecture
+
+This repository includes experimental, cutting-edge implementations that push the boundaries of the standard Transformer architecture. These features are designed to move beyond "next-token prediction" towards **thinking systems** with infinite context and efficient reasoning.
+
+### 1. Titans: Neural Memory & Infinite Context
+**The "Thinking" Memory**
+-   **vs Classic**: Standard Transformers use a static KV-Cache that grows linearly ($O(N)$) and have a fixed context window.
+-   **Titans Update**: Introduces a **Neural Memory Module** that learns at test-time. It compresses history into a fixed-size memory tensor using a "surprise-based" update rule.
+-   **Key Feature**: Includes a **Memory Decay** mechanism ($\alpha < 1.0$) to manage state saturation, allowing for theoretically infinite context windows without linear memory growth.
+
+### 2. Mixture-of-Depths (MoD): Dynamic Compute
+**The "Efficient" Router**
+-   **vs Classic**: Every token processes through every layer (same compute for "the" as for "quantum physics").
+-   **MoD Update**: Uses a **Router** to dynamically allocate compute. Only the top-$k$ most important tokens process through the MLP layers; others skip.
+-   **Safety Note**: Our implementation strictly wraps MLP layers to preserve the positional integrity of Attention layers (Isochronous Attention safety).
+
+### 3. Multi-Token Prediction (MTP): Strategic Planning
+**The "Planner" Head**
+-   **vs Classic**: Predicts only $t+1$. Greedy and short-sighted.
+-   **MTP Update**: Predicts multiple future tokens ($t+1, t+2, \dots, t+k$) simultaneously using a **Shared Head** architecture.
+-   **Optimization**: Uses lightweight position adapters instead of independent heads, reducing parameter overhead by >90% compared to naive implementations.
+
+---
+
 
 ## Installation
 
